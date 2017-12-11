@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/goBack"
+        android:icon="@drawable/ic_arrow_back_black_24dp"
+        android:iconTint="@color/icons"
+        android:title="@string/title_goBack"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/saveMed"
+        android:icon="@drawable/ic_check_black_24dp"
+        android:iconTint="@color/icons"
+        android:title="@string/title_saveMed"
+        app:showAsAction="always|withText" />
+</menu>
