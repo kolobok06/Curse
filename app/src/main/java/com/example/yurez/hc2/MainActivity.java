@@ -21,24 +21,35 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 // ОБРАБОТЧИК КЛИКА НА НАВИГАЦИЮ
-//            switch (item.getItemId()) {
-//                case R.id.navigation_home:
-//                    mTextMessage.setText(R.string.title_home);
-//                    return true;
-//                case R.id.navigation_dashboard:
-//                    mTextMessage.setText(R.string.title_dashboard);
-//                    return true;
-//                case R.id.navigation_notifications:
-//                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-//            }
-//            return false;
+//            selectFragment(item);
+            return true;
         }
     };
 
-    private void selectFragment(MenuItem item) {
-        
-    }
+//    private void selectFragment(MenuItem item) {
+//        Fragment frag = null;
+//        // init corresponding fragment
+//        switch (item.getItemId()) {
+//            case R.id.navigation_history:
+//                frag = MenuFragment.newInstance(getString(R.string.text_home),
+//                        getColorFromRes(R.color.color_home));
+//                break;
+//            case R.id.navigation_today:
+//                frag = MenuFragment.newInstance(getString(R.string.text_notifications),
+//                        getColorFromRes(R.color.color_notifications));
+//                break;
+//            case R.id.navigation_allMeds:
+//                frag = MenuFragment.newInstance(getString(R.string.text_search),
+//                        getColorFromRes(R.color.color_search));
+//                break;
+//    }
+
+//        public void changeFragment(Fragment fragment) {
+//            getFragmentManager().beginTransaction()
+//                    .replace(R.id.container, fragment) // id вашего FrameLayout
+//                    .commit();
+//        }
+
 
 
     @Override

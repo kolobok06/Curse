@@ -1,6 +1,51 @@
 <resources>
     <string name="app_name">HC2</string>
+    <!--Bottom Navigation-->
     <string name="title_history">Журнал</string>
     <string name="title_today">На сегодня</string>
     <string name="title_allMeds">Все лекарства</string>
+    <!--UpBar-->
+    <string name="title_goBack">Назад</string>
+    <string name="title_saveMed">Сохранить</string>
+    <string name="title_addMedActivity">Добавление лекарства</string>
+    <!--AddMed Activity-->
+    <string name="title_medName">Название</string>
+    <string name="title_hint_medName">Название лекарства</string>
+    <string name="title_dose">Доза</string>
+    <string-array name="list_medType">
+        <item>таблеток</item>
+        <item>мг</item>
+        <item>мл</item>
+        <item>уколов</item>
+        <item>капель</item>
+        <item>ингаляций</item>
+    </string-array>
+    <string-array name="list_plan">
+        <item>Ежедневно</item>
+        <item>Интервал дней</item>
+        <item>X приемов</item>
+        <item>X через Y дней</item>
+        <item>Каждые X часов</item>
+    </string-array>
+    <string-array name="list_whenToTake">
+        <item>До еды</item>
+        <item>Во время еды</item>
+        <item>После еды</item>
+        <item>Не важно</item>
+    </string-array>
+    <string-array name="list_administrationMethod">
+        <item>Перорально (внутрь)</item>
+        <item>Сублингвально (под язык)</item>
+        <item>Буккально ( за щеку)</item>
+        <item>Наружно</item>
+        <item>Ректально</item>
+        <item>Внутривенно</item>
+        <item>Внутримышечно</item>
+        <item>Подкожно</item>
+        <item>Внутриартериально</item>
+        <item>Ингаляционно</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
