@@ -21,11 +21,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 // ОБРАБОТЧИК КЛИКА НА НАВИГАЦИЮ
 //            selectFragment(item);
-
             return true;
         }
     };
-
+//TODO:Fragments. Selector here
 //    private void selectFragment(MenuItem item) {
 //        Fragment frag = null;
 //        // init corresponding fragment

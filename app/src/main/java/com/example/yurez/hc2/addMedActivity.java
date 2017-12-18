@@ -16,21 +16,22 @@ public class addMedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_med);
         setTitle(R.string.title_addMedActivity);
-
-//        final Spinner spinner = (Spinner) findViewById(R.id.medTypePicker);
-//        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                TextView label = (TextView) findViewById(R.id.medTypeTitle);
-//                label.setText(spinner.getSelectedItem().toString());
-//            }
-//        });
+//TODO: Deal with postfix. Maybe it's doesn't work cuz spinner isn't downloaded yet
+ /*
+        final Spinner spinner = (Spinner) findViewById(R.id.medTypePicker);
+        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView label = (TextView) findViewById(R.id.medTypeTitle);
+                label.setText(spinner.getSelectedItem().toString());
+            }
+        });
+        */
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
