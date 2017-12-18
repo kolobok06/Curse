@@ -1,5 +1,6 @@
 package com.example.yurez.hc2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // fab act
+                Intent intent = new Intent(getApplicationContext(), addMedActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -12,6 +12,8 @@
     <string name="title_medName">Название</string>
     <string name="title_hint_medName">Название лекарства</string>
     <string name="title_dose">Доза</string>
+    <string name="title_whenToTake">Употреблять</string>
+    <string name="title_administrationMethod">Способ применения</string>
     <string-array name="list_medType">
         <item>таблеток</item>
         <item>мг</item>

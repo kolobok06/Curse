@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addMedActivity"></activity>
+        <activity android:name=".addMedActivity"
+            android:label="@string/title_addMedActivity">
+
+        </activity>
     </application>
 
 </manifest>

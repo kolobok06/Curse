@@ -58,9 +58,7 @@
                     android:labelFor="@id/doseEdit"
                     android:text="@string/title_dose"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="196dp" />
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:id="@+id/doseEdit"
@@ -77,9 +75,49 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
+                    android:textSize="18sp"
                     android:entries="@array/list_medType" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/whenToTakeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@id/whenToTakePicker"
+                android:text="@string/title_whenToTake"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/whenToTakePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:entries="@array/list_plan"/>
+
+            <TextView
+                android:id="@+id/administrationMethodTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@id/administrationMethodPicker"
+                android:text="@string/title_administrationMethod"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/administrationMethodPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:entries="@array/list_administrationMethod" />
+
 
         </LinearLayout>
 
