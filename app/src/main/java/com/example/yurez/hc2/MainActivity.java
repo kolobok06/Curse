@@ -8,8 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import static android.support.design.widget.FloatingActionButton.*;
 
@@ -23,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 // ОБРАБОТЧИК КЛИКА НА НАВИГАЦИЮ
 //            selectFragment(item);
+
             return true;
         }
     };
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,13 +63,19 @@ public class MainActivity extends AppCompatActivity {
         medAdd.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                // fab act
                 Intent intent = new Intent(getApplicationContext(), addMedActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0)
+            if (resultCode == RESULT_OK) {
+                MedInfo medInfo = new MedInfo();
+                medInfo.unpackMed(data.getStringArrayExtra("med"));
+                //TODO: handle new data
+            }
+    }
 }

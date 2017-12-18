@@ -11,9 +11,12 @@
     <!--AddMed Activity-->
     <string name="title_medName">Название</string>
     <string name="title_hint_medName">Название лекарства</string>
+    <string name="title_hint_medType">тип</string>
     <string name="title_dose">Доза</string>
+    <string name="title_plan">План приема</string>
     <string name="title_whenToTake">Употреблять</string>
-    <string name="title_administrationMethod">Способ применения</string>
+    <string name="title_adminMethod">Способ применения</string>
+    <string name="title_remainingAmount">Осталось </string>
     <string-array name="list_medType">
         <item>таблеток</item>
         <item>мг</item>
@@ -35,7 +38,7 @@
         <item>После еды</item>
         <item>Не важно</item>
     </string-array>
-    <string-array name="list_administrationMethod">
+    <string-array name="list_adminMethod">
         <item>Перорально (внутрь)</item>
         <item>Сублингвально (под язык)</item>
         <item>Буккально ( за щеку)</item>

@@ -31,8 +31,13 @@
                 android:layout_marginTop="10dp"
                 android:labelFor="@id/medNameEdit"
                 android:text="@string/title_medName"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
 
             <EditText
                 android:id="@+id/medNameEdit"
@@ -54,31 +59,74 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:labelFor="@id/doseEdit"
                     android:text="@string/title_dose"
-                    android:textSize="24sp"
-                    android:textStyle="bold"/>
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2" />
 
                 <EditText
                     android:id="@+id/doseEdit"
-                    android:layout_width="70dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:ems="10"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:textAlignment="textEnd" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2" />
 
                 <Spinner
                     android:id="@+id/medTypePicker"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:entries="@array/list_medType" />
+                    android:layout_weight="0.5"
+                    android:entries="@array/list_medType"
+                    android:spinnerMode="dialog"
+                    android:textSize="18sp" />
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
+
+            <TextView
+                android:id="@+id/planTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@id/planPicker"
+                android:text="@string/title_plan"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/planPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:entries="@array/list_plan"
+                android:spinnerMode="dialog" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
 
             <TextView
                 android:id="@+id/whenToTakeTitle"
@@ -89,7 +137,7 @@
                 android:layout_marginTop="10dp"
                 android:labelFor="@id/whenToTakePicker"
                 android:text="@string/title_whenToTake"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <Spinner
@@ -97,29 +145,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:entries="@array/list_plan"/>
-
-            <TextView
-                android:id="@+id/administrationMethodTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:labelFor="@id/administrationMethodPicker"
-                android:text="@string/title_administrationMethod"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:entries="@array/list_whenToTake"
+                android:spinnerMode="dialog" />
 
             <Spinner
-                android:id="@+id/administrationMethodPicker"
+                android:id="@+id/adminMethodPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:entries="@array/list_administrationMethod" />
+                android:entries="@array/list_adminMethod"
+                android:spinnerMode="dialog" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/remainingAmountTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.5"
+                    android:labelFor="@id/remainingAmountEdit"
+                    android:text="@string/title_remainingAmount"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2" />
+
+                <EditText
+                    android:id="@+id/remainingAmountEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:textAlignment="textEnd" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/medTypeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2.5"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
+
+
 
 
     </ScrollView>
