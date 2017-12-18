@@ -72,7 +72,6 @@ public class addMedActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             //case R.id.goBack:
             case android.R.id.home:
-                //TODO: Maybe set default?
                 setResult(RESULT_CANCELED);
                 this.finish();
                 return true;
