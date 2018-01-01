@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addMed"
+            android:id="@+id/addMedBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -36,7 +36,12 @@
             android:tint="@color/icons"
             app:borderWidth="20dp"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_plus" />
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+
+        <ListView
+            android:id="@+id/todayItemsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </FrameLayout>
 
 

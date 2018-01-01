@@ -14,9 +14,10 @@
     <string name="title_hint_medType">тип</string>
     <string name="title_dose">Доза</string>
     <string name="title_plan">План приема</string>
-    <string name="title_whenToTake">Употреблять</string>
+    <string name="title_startDate">Дата начала</string>
+    <string name="title_whenToTake">Принимать</string>
     <string name="title_adminMethod">Способ применения</string>
-    <string name="title_remainingAmount">Осталось </string>
+    <string name="title_remainingAmount">Осталось лекарств</string>
     <string-array name="list_medType">
         <item>таблеток</item>
         <item>мг</item>
