@@ -12,13 +12,15 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class addMedActivity extends AppCompatActivity {
 
-    EditText startDateEdit;
+    TextView startDatePicker, finalDatePicker;
     Calendar dateCal = Calendar.getInstance();
+    View activeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +28,20 @@ public class addMedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_med);
         setTitle(R.string.title_addMedActivity);
 
-        startDateEdit = (EditText) findViewById(R.id.startDateEdit);
-        startDateEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setDate(view);
-            }
-        });
-
-
+        startDatePicker = (TextView) findViewById(R.id.startDatePicker);
+        startDatePicker.setOnClickListener(datePickerListener);
+        finalDatePicker = (TextView) findViewById(R.id.finalDatePicker);
+        finalDatePicker.setOnClickListener(datePickerListener);
     }
+
+    View.OnClickListener datePickerListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            activeView = view;
+            setDate(view);
+        }
+    };
+
 //region datePicker
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
@@ -44,15 +50,15 @@ public class addMedActivity extends AppCompatActivity {
             dateCal.set(Calendar.YEAR, year);
             dateCal.set(Calendar.MONTH, month);
             dateCal.set(Calendar.DAY_OF_MONTH, day);
-            setInitialDate();
-
+            setInitialDate(activeView);
         }
     };
 
-    private void setInitialDate() {
-        startDateEdit.setText(
+    private void setInitialDate(View view) {
+        TextView tv = (TextView) view;
+        tv.setText(
                 DateUtils.formatDateTime(this, dateCal.getTimeInMillis(),
-                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR /*| DateUtils.FORMAT_SHOW_TIME*/));
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
     public void setDate(View v) {
@@ -132,12 +138,10 @@ public void onNothingSelected(AdapterView<?> adapterView) {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            //case R.id.goBack:
             case android.R.id.home:
                 setResult(RESULT_CANCELED);
                 this.finish();
                 return true;
-
             case R.id.saveMed:
                 //TODO: check empty fields
                 Intent intent = new Intent();

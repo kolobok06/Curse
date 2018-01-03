@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        FloatingActionButton medAdd = (FloatingActionButton) findViewById(R.id.addMed);
+        FloatingActionButton medAddBtn = (FloatingActionButton) findViewById(R.id.addMedBtn);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        medAdd.setOnClickListener(new OnClickListener() {
+        medAddBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), addMedActivity.class);
