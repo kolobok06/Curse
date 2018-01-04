@@ -78,7 +78,7 @@
                     android:ems="10"
                     android:inputType="numberDecimal"
                     android:maxLength="6"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="center" />
 
                 <Space
                     android:layout_width="0dp"
@@ -232,17 +232,18 @@
                 android:layout_weight="5" />
 
             <LinearLayout
+                android:id="@+id/remAmountLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/remainingAmountTitle"
+                    android:id="@+id/remAmountTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/main_margin"
                     android:layout_weight="0.5"
-                    android:labelFor="@id/remainingAmountEdit"
+                    android:labelFor="@id/remAmountEdit"
                     android:text="@string/title_remainingAmount"
                     android:textSize="@dimen/title_textSize"
                     android:textStyle="bold" />
@@ -253,7 +254,7 @@
                     android:layout_weight="0.2" />
 
                 <EditText
-                    android:id="@+id/remainingAmountEdit"
+                    android:id="@+id/remAmountEdit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/main_margin"

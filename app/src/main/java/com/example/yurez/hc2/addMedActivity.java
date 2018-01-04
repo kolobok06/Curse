@@ -13,14 +13,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.Calendar;
 
 public class addMedActivity extends AppCompatActivity {
-
     TextView startDatePicker, finalDatePicker;
     Calendar dateCal = Calendar.getInstance();
     View activeView;
+    //Long startDateMs, finalDateMs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +58,7 @@ public class addMedActivity extends AppCompatActivity {
         tv.setText(
                 DateUtils.formatDateTime(this, dateCal.getTimeInMillis(),
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+        view.setTag(dateCal.getTimeInMillis());
     }
 
     public void setDate(View v) {
@@ -111,28 +111,31 @@ public void onNothingSelected(AdapterView<?> adapterView) {
         EditText edit;
         Spinner picker;
 
-        edit = (EditText) this.findViewById(R.id.medNameEdit);
+        edit = (EditText) findViewById(R.id.medNameEdit);
         medInfo.name = edit.getText().toString();
-        edit = (EditText) this.findViewById(R.id.doseEdit);
-        medInfo.doze = Float.parseFloat(edit.getText().toString());
-        picker = (Spinner) this.findViewById(R.id.medTypePicker);
+
+        edit = (EditText) findViewById(R.id.doseEdit);
+        medInfo.dose = Float.parseFloat(edit.getText().toString());
+
+        picker = (Spinner) findViewById(R.id.medTypePicker);
         medInfo.medType = picker.getSelectedItem().toString();
-        picker = (Spinner) this.findViewById(R.id.planPicker);
+
+        picker = (Spinner) findViewById(R.id.planPicker);
         medInfo.plan = picker.getSelectedItem().toString();
-        picker = (Spinner) this.findViewById(R.id.whenToTakePicker);
+
+        medInfo.startDate = (Long) startDatePicker.getTag(); //not trusted
+
+        medInfo.finalDate = (Long) finalDatePicker.getTag();
+
+        picker = (Spinner) findViewById(R.id.whenToTakePicker);
         medInfo.whenToTake = picker.getSelectedItem().toString();
-        picker = (Spinner) this.findViewById(R.id.adminMethodPicker);
+
+        picker = (Spinner) findViewById(R.id.adminMethodPicker);
         medInfo.adminMethod = picker.getSelectedItem().toString();
 
-        /*
-        List<String> Lines = Arrays.asList(getResources().getStringArray(R.array.Lines));
-        public String name;
-        public String doze;
-        public String medType;
-        public String plan;
-        public String whenToTake;
-        public String adminMethod;
-        */
+        edit = (EditText) findViewById(R.id.remAmountEdit);
+        medInfo.remAmount = Integer.parseInt(edit.getText().toString());
+
         return medInfo;
     }
 

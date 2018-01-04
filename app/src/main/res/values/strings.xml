@@ -5,13 +5,11 @@
     <string name="title_today">На сегодня</string>
     <string name="title_allMeds">Все лекарства</string>
     <!--UpBar-->
-    <string name="title_goBack">Назад</string>
     <string name="title_saveMed">Сохранить</string>
     <string name="title_addMedActivity">Добавление лекарства</string>
     <!--AddMed Activity-->
     <string name="title_medName">Название</string>
     <string name="title_hint_medName">Название лекарства</string>
-    <string name="title_hint_medType">тип</string>
     <string name="title_dose">Доза</string>
     <string name="title_plan">План приема</string>
     <string name="title_startDate">Дата начала</string>
