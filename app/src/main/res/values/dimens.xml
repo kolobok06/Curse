@@ -7,4 +7,5 @@
     <dimen name="title_textSize">18sp</dimen>
     <dimen name="title_item_bigTextSize">30sp</dimen>
     <dimen name="title_item_textSize">18sp</dimen>
+    <dimen name="dialog_layout_padding">16dp</dimen>
 </resources>

@@ -49,9 +49,53 @@
                 android:inputType="text"
                 android:textSize="@dimen/title_textSize" />
 
+            <TextView
+                android:id="@+id/planTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/main_margin"
+                android:layout_marginStart="@dimen/main_margin"
+                android:labelFor="@id/planPicker"
+                android:text="@string/title_plan"
+                android:textSize="@dimen/title_textSize"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/planPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/main_margin"
+                android:entries="@array/list_plan"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                android:id="@+id/planTitle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/main_margin"
+                android:layout_marginStart="@dimen/main_margin"
+                android:labelFor="@+id/medTypePicker"
+                android:text="@string/title_medType"
+                android:textSize="@dimen/title_textSize"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/medTypePicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/main_margin"
+                android:layout_marginStart="@dimen/main_margin"
+                android:layout_weight="0.5"
+                android:entries="@array/list_medType"
+                android:spinnerMode="dialog"
+                android:textSize="18sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/main_margin"
                 android:orientation="horizontal">
 
                 <TextView
@@ -74,53 +118,19 @@
                     android:id="@+id/doseEdit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/main_margin"
                     android:layout_weight="2"
                     android:ems="10"
                     android:inputType="numberDecimal"
                     android:maxLength="6"
                     android:textAlignment="center" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2" />
-
-                <Spinner
-                    android:id="@+id/medTypePicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/main_margin"
-                    android:layout_marginStart="@dimen/main_margin"
-                    android:layout_weight="0.5"
-                    android:spinnerMode="dialog"
-                    android:textSize="18sp"
-                    android:entries="@array/list_medType"/>
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5" />
-
-            <TextView
-                android:id="@+id/planTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/main_margin"
-                android:layout_marginStart="@dimen/main_margin"
-                android:layout_marginTop="@dimen/main_margin"
-                android:labelFor="@id/planPicker"
-                android:text="@string/title_plan"
-                android:textSize="@dimen/title_textSize"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/planPicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_margin"
-                android:entries="@array/list_plan"
-                android:spinnerMode="dialog" />
 
             <LinearLayout
                 android:id="@+id/startDateLayout"

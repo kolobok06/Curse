@@ -12,14 +12,16 @@
     <string name="title_hint_medName">Название лекарства</string>
     <string name="title_dose">Доза</string>
     <string name="title_plan">План приема</string>
+    <string name="title_medType">Единицы измерения</string>
     <string name="title_startDate">Дата начала</string>
     <string name="title_finalDate">Дата окончания</string>
-    <string name="title_hint_dialogPicker">Установить...</string>
+    <string name="title_hint_dialogPicker">Установить…</string>
     <string name="title_whenToTake">Принимать</string>
     <string name="title_adminMethod">Способ применения</string>
     <string name="title_remainingAmount">Осталось лекарств</string>
     <string-array name="list_medType">
-        <item>таблеток</item>
+        <item>таблетки</item>
+        <item>г</item>
         <item>мг</item>
         <item>мл</item>
         <item>уколов</item>
@@ -51,7 +53,8 @@
         <item>Внутриартериально</item>
         <item>Ингаляционно</item>
     </string-array>
+    <!--Add Dose and Time Dialog-->
+    <string name="title_ok">Ок</string>
+    <string name="title_cancel">Отмена</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
