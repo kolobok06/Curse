@@ -1,6 +1,7 @@
 package com.example.yurez.hc2;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,15 +10,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 import static android.support.design.widget.FloatingActionButton.*;
 
-public class MainActivity extends AppCompatActivity {
-    ArrayList<MedInfo> aMeds = new ArrayList<MedInfo>();
-    TodayListAdapter todayListAdapter;
+public class MainActivity extends AppCompatActivity implements AllMedsFragment.OnFragmentInteractionListener, TodayMedsFragment.OnFragmentInteractionListener {
+    final public static String TAG_MED_INFO = "med_info";
+
+    FragmentManager fragmentManager;
+    AllMedsFragment allMedsFragment;
+    TodayMedsFragment todayMedsFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -28,32 +29,27 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
-//TODO:Fragments. Selector here
+
+    //TODO:Fragments. Selector here
     private void selectFragment(MenuItem item) {
-        Fragment frag = null;
-        // init corresponding fragment
         switch (item.getItemId()) {
             case R.id.navigation_history:
                 //
                 break;
             case R.id.navigation_today:
-                //
+                changeFragment(todayMedsFragment);
                 break;
             case R.id.navigation_allMeds:
-                //
+                changeFragment(allMedsFragment);
                 break;
         }
-        changeFragment(frag);
     }
 
-        public void changeFragment(Fragment fragment) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.containerLayout, fragment) // id вашего FrameLayout
-                    .commit();
-        }
-
-
-
+    public void changeFragment(Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerLayout, fragment) // id вашего FrameLayout
+                .commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton medAddBtn = (FloatingActionButton) findViewById(R.id.addMedBtn);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        todayListAdapter = new TodayListAdapter(this, aMeds);
-        ListView todayItemsList = (ListView) findViewById(R.id.todayItemsList);
-        todayItemsList.setAdapter(todayListAdapter);
+        fragmentManager = getFragmentManager();
+        allMedsFragment = new AllMedsFragment();
+        todayMedsFragment = new TodayMedsFragment();
 
         medAddBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), addMedActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddMedActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
@@ -82,10 +78,20 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 0)
             if (resultCode == RESULT_OK) {
                 MedInfo medInfo = new MedInfo();
-                medInfo.unpackMed(data.getStringArrayExtra("med"));
-                aMeds.add(medInfo);
-                todayListAdapter.notifyDataSetChanged();
+                medInfo.unpackMed(data.getStringArrayExtra(TAG_MED_INFO));
+                MedDataHolder.aAllMeds.add(medInfo);
+                allMedsFragment.refreshAllMedsList();
                 //TODO: handle new data
             }
+    }
+
+    @Override
+    public void onFragmentAllMedsListItemClicked(Integer index) {
+
+    }
+
+    @Override
+    public void onFragmentTodayMedsListItemClicked(Integer index) {
+
     }
 }

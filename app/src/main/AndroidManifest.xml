@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".addMedActivity"
+            android:name=".AddMedActivity"
             android:label="@string/title_addMedActivity"
             android:screenOrientation="portrait">
         </activity>

@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import java.util.Calendar;
 
-public class addMedActivity extends AppCompatActivity {
+public class AddMedActivity extends AppCompatActivity {
     TextView startDatePicker, finalDatePicker;
     Calendar dateCal = Calendar.getInstance();
     View activeView;
@@ -62,7 +62,7 @@ public class addMedActivity extends AppCompatActivity {
     }
 
     public void setDate(View v) {
-        new DatePickerDialog(addMedActivity.this, d,
+        new DatePickerDialog(AddMedActivity.this, d,
                 dateCal.get(Calendar.YEAR),
                 dateCal.get(Calendar.MONTH),
                 dateCal.get(Calendar.DAY_OF_MONTH))
@@ -149,7 +149,7 @@ public void onNothingSelected(AdapterView<?> adapterView) {
                 //TODO: check empty fields
                 Intent intent = new Intent();
                 MedInfo medInfo = grabMedInfo();
-                intent.putExtra("med", medInfo.packMed());
+                intent.putExtra(MainActivity.TAG_MED_INFO, medInfo.packMed());
                 setResult(RESULT_OK, intent);
                 this.finish();
                 return true;
