@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TodayListAdapter extends BaseAdapter {
     private Context ctx;
@@ -34,7 +35,7 @@ public class TodayListAdapter extends BaseAdapter {
         return i;
     }
 
-    MedInfo getMed(int i) {
+    public MedInfo getMed(int i) {
         return ((MedInfo) getItem(i));
     }
 
@@ -48,7 +49,7 @@ public class TodayListAdapter extends BaseAdapter {
         ((TextView) rView.findViewById(R.id.item_medNameTitle)).setText(med.name);
         ((TextView) rView.findViewById(R.id.item_adminMethodTitle)).setText(med.adminMethod);
         ((TextView) rView.findViewById(R.id.item_whenToTakeTitle)).setText(med.whenToTake);
-        ((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format("%.2f %s", med.dose, med.medType));
+        ((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(),"%.2f %s", med.doseTimes.get(0).dose, med.medType));
         //TODO: Add time filling
         return rView;
     }

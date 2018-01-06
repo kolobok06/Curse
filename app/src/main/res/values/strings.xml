@@ -11,6 +11,7 @@
     <string name="title_medName">Название</string>
     <string name="title_hint_medName">Название лекарства</string>
     <string name="title_dose">Доза</string>
+    <string name="title_addDose">Добавить время и дозу</string>
     <string name="title_plan">План приема</string>
     <string name="title_medType">Единицы измерения</string>
     <string name="title_startDate">Дата начала</string>
@@ -56,5 +57,6 @@
     <!--Add Dose and Time Dialog-->
     <string name="title_ok">Ок</string>
     <string name="title_cancel">Отмена</string>
+    <string name="title_hint_timePicker">Время…</string>
 
 </resources>

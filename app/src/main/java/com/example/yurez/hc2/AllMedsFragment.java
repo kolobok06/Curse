@@ -25,6 +25,7 @@ public class AllMedsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refreshAllMedsList();
     }
 
     @Override
@@ -52,7 +53,9 @@ public class AllMedsFragment extends Fragment {
     }
 
     public void refreshAllMedsList() {
+        if (allMedsListAdapter != null) {
         allMedsListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

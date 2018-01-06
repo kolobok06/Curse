@@ -2,22 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialogAddDoseLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="@dimen/dialog_elevation"
     android:orientation="vertical"
     android:padding="@dimen/dialog_layout_padding">
 
     <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dialog_layout_padding"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/doseEdit"
+            android:id="@+id/dialog_doseEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:ems="10"
+            android:hint="@string/title_dose"
             android:inputType="numberDecimal"
             android:maxLength="6"
             android:textAlignment="center" />
@@ -25,56 +30,25 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0.5" />
 
         <TextView
-            android:id="@+id/medTypeTitle"
+            android:id="@+id/dialog_medTypeTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:labelFor="@id/doseEdit"
-            android:layout_weight="2"
-            android:text="TextView" />
+            android:layout_weight="3"
+            android:labelFor="@id/dialog_doseEdit"
+            android:text="TextView"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/title_item_textSize" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/setTimeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="Button" />
     </LinearLayout>
 
-    <LinearLayout
+    <TimePicker
+        android:id="@+id/dialog_timePicker"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="end"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/cancelBtn"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_cancel"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="456dp" />
-
-        <Button
-            android:id="@+id/okBtn"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_ok"
-            tools:layout_editor_absoluteX="198dp"
-            tools:layout_editor_absoluteY="516dp" />
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

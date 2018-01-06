@@ -51,7 +51,8 @@ public class AllMedsListAdapter extends BaseAdapter {
         ((TextView) rView.findViewById(R.id.item_adminMethodTitle)).setText(med.adminMethod);
         ((TextView) rView.findViewById(R.id.item_whenToTakeTitle)).setText(med.whenToTake);
         ((TextView) rView.findViewById(R.id.item_remAmountTitle)).setText(String.format(Locale.getDefault(), "Осталось %d %s", med.remAmount, med.medType));
-        ((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(), "%.2f %s", med.dose, med.medType));
+        //((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(), "%.2f %s", med.doseTimes.get(0).dose, med.medType));
+        //TODO: Consider change item layout
 
         return rView;
     }

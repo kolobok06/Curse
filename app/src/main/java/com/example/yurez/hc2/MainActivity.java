@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements AllMedsFragment.O
                 break;
             case R.id.navigation_allMeds:
                 changeFragment(allMedsFragment);
+                allMedsFragment.refreshAllMedsList();
                 break;
         }
     }
@@ -77,9 +78,6 @@ public class MainActivity extends AppCompatActivity implements AllMedsFragment.O
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0)
             if (resultCode == RESULT_OK) {
-                MedInfo medInfo = new MedInfo();
-                medInfo.unpackMed(data.getStringArrayExtra(TAG_MED_INFO));
-                MedDataHolder.aAllMeds.add(medInfo);
                 allMedsFragment.refreshAllMedsList();
                 //TODO: handle new data
             }
