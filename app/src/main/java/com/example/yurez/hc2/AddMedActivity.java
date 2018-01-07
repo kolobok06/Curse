@@ -278,26 +278,26 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         while ((curH < 24) && (countTimes != 0)) {
             if (curM > 59) {
                 ++curH;
-                curM -= 60;
-                continue; //for checking 24 bound
+                curM -= 60; //goto check 24 bound
+            } else {
+                doseTimeList.add(new DoseTime(curH, curM, dose));
+                curH += incHour;
+                curM += incMin;
+                --countTimes;
             }
-            doseTimeList.add(new DoseTime(curH, curM, dose));
-            curH += incHour;
-            curM += incMin;
-            --countTimes;
         }
         curH = hour - incHour;
         curM = min - incMin;
         while ((curH >= 0) && (countTimes != 0)) {
             if (curM < 0) {
                 --curH;
-                curM += 60;
-                continue; //for checking 0 bound
+                curM += 60; //goto check 0 bound
+            } else {
+                doseTimeList.add(new DoseTime(curH, curM, dose));
+                curH -= incHour;
+                curM -= incMin;
+                --countTimes;
             }
-            doseTimeList.add(new DoseTime(curH, curM, dose));
-            curH -= incHour;
-            curM -= incMin;
-            --countTimes;
         }
     }
 
