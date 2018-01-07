@@ -28,8 +28,8 @@ public class DoseTimeRecViewAdapter extends RecyclerView.Adapter<DoseTimeRecView
         DoseTime doseTime = doseTimeList.get(position);
         Locale loc = Locale.getDefault();
 
-        holder.doseValue.setText(String.format(loc, "%.2f %s", doseTime.dose, AddMedActivity.medType));
-        holder.timeValue.setText(String.format(loc, "%02d:%02d", doseTime.hour, doseTime.min));
+        holder.doseValue.setText(String.format(loc, "%s %s", doseTime.getDoseString(), AddMedActivity.medType));
+        holder.timeValue.setText(doseTime.getTimeString());
     }
 
     @Override

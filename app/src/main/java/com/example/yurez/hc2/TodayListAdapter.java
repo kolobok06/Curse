@@ -49,7 +49,7 @@ public class TodayListAdapter extends BaseAdapter {
         ((TextView) rView.findViewById(R.id.item_medNameTitle)).setText(med.name);
         ((TextView) rView.findViewById(R.id.item_adminMethodTitle)).setText(med.adminMethod);
         ((TextView) rView.findViewById(R.id.item_whenToTakeTitle)).setText(med.whenToTake);
-        ((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(),"%.2f %s", med.doseTimes.get(0).dose, med.medType));
+        ((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(),"%s %s", med.doseTimes.get(0).getDoseString(), med.medType));
         //TODO: Add time filling
         return rView;
     }

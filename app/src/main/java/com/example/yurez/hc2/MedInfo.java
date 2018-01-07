@@ -3,16 +3,19 @@ package com.example.yurez.hc2;
 import java.util.ArrayList;
 
 class MedInfo {
-    String name;
-    String medType;
-    String plan;
-    ArrayList<DoseTime> doseTimes;
+    String name = "";
+    String medType = "";
+    String plan = "";
     Long startDate;
-    Long finalDate;
-    String whenToTake;
-    String adminMethod;
-    Integer remAmount;
-    //TODO: time, days, etc;
+    Long finalDate = -1L;
+    ArrayList<DoseTime> doseTimes;
+    String whenToTake = "";
+    String adminMethod = "";
+    Integer remAmount = -1;
+    String note = "";
+    Integer state;
+    Integer countPos = 0;
+    Integer countNeg = 0;
 
     @Deprecated
     void unpackMed(String[] aDataStr) {

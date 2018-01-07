@@ -13,6 +13,9 @@
     <string name="title_dose">Доза</string>
     <string name="title_addDose">Добавить время и дозу</string>
     <string name="title_plan">План приема</string>
+    <string name="title_x">X:</string>
+    <string name="title_y">Y:</string>
+    <string name="title_hours">Каждые </string>
     <string name="title_medType">Единицы измерения</string>
     <string name="title_startDate">Дата начала</string>
     <string name="title_finalDate">Дата окончания</string>
@@ -20,6 +23,7 @@
     <string name="title_whenToTake">Принимать</string>
     <string name="title_adminMethod">Способ применения</string>
     <string name="title_remainingAmount">Осталось лекарств</string>
+    <string name="title_note">Дополнительно</string>
     <string-array name="list_medType">
         <item>таблетки</item>
         <item>г</item>
@@ -29,10 +33,10 @@
         <item>капель</item>
         <item>ингаляций</item>
     </string-array>
+    <!--DO NOT CHANGE THE ORDER OF list_plan! dependence in AddMedActivity-->
     <string-array name="list_plan">
         <item>Ежедневно</item>
         <item>Интервал дней</item>
-        <item>X приемов</item>
         <item>X через Y дней</item>
         <item>Каждые X часов</item>
     </string-array>
@@ -54,9 +58,21 @@
         <item>Внутриартериально</item>
         <item>Ингаляционно</item>
     </string-array>
+    <string-array name="list_hours">
+        <item>0.5 часа</item>
+        <item>1 час</item>
+        <item>1.5 часа</item>
+        <item>2 часа</item>
+        <item>3 часа</item>
+        <item>4 часа</item>
+        <item>6 часов</item>
+        <item>8 часов</item>
+        <item>12 часов</item>
+    </string-array>
     <!--Add Dose and Time Dialog-->
     <string name="title_ok">Ок</string>
     <string name="title_cancel">Отмена</string>
     <string name="title_hint_timePicker">Время…</string>
+
 
 </resources>
