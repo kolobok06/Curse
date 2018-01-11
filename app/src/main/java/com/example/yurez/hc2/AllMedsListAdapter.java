@@ -10,40 +10,48 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class AllMedsListAdapter extends BaseAdapter {
+public class AllMedsListAdapter extends BaseAdapter
+{
     private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<MedInfo> aMeds;
 
-    AllMedsListAdapter(Context context, ArrayList<MedInfo> meds) {
+    AllMedsListAdapter(Context context, ArrayList<MedInfo> meds)
+    {
         ctx = context;
         aMeds = meds;
         lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return aMeds.size();
     }
 
     @Override
-    public Object getItem(int i) {
+    public Object getItem(int i)
+    {
         return aMeds.get(i);
     }
 
     @Override
-    public long getItemId(int i) {
+    public long getItemId(int i)
+    {
         return i;
     }
 
-    MedInfo getMed(int i) {
+    MedInfo getMed(int i)
+    {
         return ((MedInfo) getItem(i));
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup)
+    {
         View rView = view;
-        if (rView == null) {
+        if (rView == null)
+        {
             rView = lInflater.inflate(R.layout.item_all_meds, viewGroup, false);
         }
         MedInfo med = getMed(i);

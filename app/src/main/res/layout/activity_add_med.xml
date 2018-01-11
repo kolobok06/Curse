@@ -33,11 +33,6 @@
             android:textSize="@dimen/title_textSize"
             android:textStyle="bold" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5" />
-
         <EditText
             android:id="@+id/medNameEdit"
             android:layout_width="match_parent"
@@ -45,7 +40,7 @@
             android:layout_marginBottom="@dimen/main_margin"
             android:ems="10"
             android:hint="@string/title_hint_medName"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:textSize="@dimen/title_textSize" />
 
         <TextView

@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:text="rh"
+            android:maxLines="1"
+            android:text="@string/title_medName"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/title_item_bigTextSize"
             android:textStyle="bold" />

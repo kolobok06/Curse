@@ -10,36 +10,43 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PlanPickerAdapter extends BaseAdapter {
+public class PlanPickerAdapter extends BaseAdapter
+{
     private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<String> planList;
 
-   PlanPickerAdapter(Context context, ArrayList<String> arrayList) {
-       ctx = context;
-       planList = arrayList;
-       lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-   }
+    PlanPickerAdapter(Context context, ArrayList<String> arrayList)
+    {
+        ctx = context;
+        planList = arrayList;
+        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return planList.size();
     }
 
     @Override
-    public Object getItem(int i) {
+    public Object getItem(int i)
+    {
         return planList.get(i);
     }
 
     @Override
-    public long getItemId(int i) {
+    public long getItemId(int i)
+    {
         return i;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup)
+    {
         View rView = view;
-        if (rView == null) {
+        if (rView == null)
+        {
             rView = lInflater.inflate(R.layout.item_spinner, viewGroup, false);
         }
         String str = (String) getItem(i);
