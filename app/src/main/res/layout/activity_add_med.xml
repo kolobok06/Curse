@@ -323,7 +323,7 @@
                 android:layout_weight="0.5"
                 android:gravity="center_vertical"
                 android:labelFor="@id/remAmountEdit"
-                android:text="@string/title_remainingAmount"
+                android:text="@string/title_remAmount"
                 android:textSize="@dimen/title_textSize"
                 android:textStyle="bold" />
 
@@ -340,7 +340,7 @@
                 android:layout_weight="4"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:maxLength="6"
+                android:maxLength="7"
                 android:textAlignment="center" />
 
         </LinearLayout>

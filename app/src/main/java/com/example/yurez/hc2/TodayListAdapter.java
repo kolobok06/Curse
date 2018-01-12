@@ -52,7 +52,7 @@ public class TodayListAdapter extends BaseAdapter
         View rView = view;
         if (rView == null)
         {
-            rView = lInflater.inflate(R.layout.item_today_list, viewGroup, false);
+            rView = lInflater.inflate(R.layout.item_today, viewGroup, false);
         }
         MedInfo med = getMed(i);
         ((TextView) rView.findViewById(R.id.item_medNameTitle)).setText(med.name);

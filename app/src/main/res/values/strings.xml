@@ -9,6 +9,9 @@
     <string name="title_addMedActivity">Добавление лекарства</string>
     <!--Accept Activity-->
     <string name="title_accept">Принять</string>
+    <string name="title_ignore">Пропустить</string>
+    <string name="pretext_from">с </string>
+    <string name="pretext_to"> по </string>
     <!--AddMed Activity-->
     <string name="title_medName">Название</string>
     <string name="title_hint_medName">Название лекарства</string>
@@ -24,14 +27,14 @@
     <string name="title_hint_dialogPicker">Установить…</string>
     <string name="title_whenToTake">Принимать</string>
     <string name="title_adminMethod">Способ применения</string>
-    <string name="title_remainingAmount">Осталось лекарств</string>
+    <string name="title_remAmount">Осталось лекарств</string>
     <string name="title_note">Дополнительно</string>
     <string-array name="list_medType">
         <item>таблетки</item>
         <item>г</item>
         <item>мг</item>
         <item>мл</item>
-        <item>уколов</item>
+        <item>инъекций</item>
         <item>капель</item>
         <item>ингаляций</item>
     </string-array>
@@ -42,11 +45,12 @@
         <item>X через Y дней</item>
         <item>Каждые X часов</item>
     </string-array>
+    <!--DO NOT CHANGE THE ORDER OF list_whenToTake! dependence in AcceptActivity-->
     <string-array name="list_whenToTake">
+        <item>Не важно</item>
         <item>До еды</item>
         <item>Во время еды</item>
         <item>После еды</item>
-        <item>Не важно</item>
     </string-array>
     <string-array name="list_adminMethod">
         <item>Перорально (внутрь)</item>

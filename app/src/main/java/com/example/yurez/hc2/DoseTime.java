@@ -16,15 +16,35 @@ public class DoseTime implements Comparable<Object>
         this.dose = dose;
     }
 
+    public DoseTime(DoseTime dt)
+    {
+        this.hour = dt.hour;
+        this.min = dt.min;
+        this.dose = dt.dose;
+    }
+
+    public Integer getHour()
+    {
+        return this.hour;
+    }
+
+    public Integer getMin()
+    {
+        return this.min;
+    }
+
+    public Float getDose()
+    {
+        return this.dose;
+    }
+
     @Override
     public int compareTo(@NonNull Object o)
     {
         DoseTime obj = (DoseTime) o;
         int res = this.hour.compareTo(obj.hour);
         if (res == 0)
-        {
             res = this.min.compareTo(obj.min);
-        }
         return res;
     }
 

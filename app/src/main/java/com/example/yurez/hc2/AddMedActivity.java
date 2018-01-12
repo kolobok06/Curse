@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -223,7 +225,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
             }
         });
 
-        index = getIntent().getIntExtra(MainActivity.TAG_MED_INDEX, -1);
+        index = getIntent().getIntExtra(MainActivity.TAG_MED_INDEX_SIMPLE, -1);
         if (index > 0)
             fillInfo(index);
     }
@@ -241,7 +243,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
 
     private MedInfo grabMedInfo()
     {
-        MedInfo medInfo = new MedInfo();
+        MedInfo medInfo = new MedInfo(null);
         EditText edit;
         Spinner picker;
         edit = (EditText) findViewById(R.id.medNameEdit);
@@ -271,7 +273,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         medInfo.adminMethod = picker.getSelectedItem().toString();
 
         edit = (EditText) findViewById(R.id.remAmountEdit);
-        medInfo.remAmount = Integer.parseInt(edit.getText().toString());
+        medInfo.remAmount = Float.parseFloat(edit.getText().toString());
 
         edit = (EditText) findViewById(R.id.noteEdit);
         medInfo.note = edit.getText().toString();
@@ -324,7 +326,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         picker.setSelection(medInfo.numAdminMethod);
 
         edit = (EditText) findViewById(R.id.remAmountEdit);
-        edit.setText(medInfo.remAmount.toString());
+        edit.setText(String.format(Locale.getDefault(), "%.2f", medInfo.remAmount));
 
         edit = (EditText) findViewById(R.id.noteEdit);
         edit.setText(medInfo.note);
@@ -347,11 +349,13 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
                 //TODO: check empty fields
                 if (checkEmpty())
                 {
+                    Intent intent = new Intent();
+                    intent.putExtra(MainActivity.TAG_MED_INDEX, index);
                     if (index > 0)
-                        MedDataHolder.aAllMeds.add(grabMedInfo());
+                        MedDataHolder.aAllMeds.add(grabMedInfo()); //TODO: Create intent with index
                     else
                         MedDataHolder.aAllMeds.set(index, grabMedInfo());
-                    setResult(RESULT_OK);
+                    setResult(RESULT_OK, intent);
                     this.finish();
                 }
                 return true;

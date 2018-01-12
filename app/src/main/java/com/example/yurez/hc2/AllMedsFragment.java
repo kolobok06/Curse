@@ -16,8 +16,7 @@ public class AllMedsFragment extends Fragment
     public AllMedsListAdapter allMedsListAdapter;
 
     public AllMedsFragment()
-    {
-        // Required empty public constructor
+    { // Required empty public constructor
     }
 
     public static AllMedsFragment newInstance()

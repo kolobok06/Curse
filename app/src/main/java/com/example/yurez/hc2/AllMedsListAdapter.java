@@ -51,17 +51,13 @@ public class AllMedsListAdapter extends BaseAdapter
     {
         View rView = view;
         if (rView == null)
-        {
             rView = lInflater.inflate(R.layout.item_all_meds, viewGroup, false);
-        }
         MedInfo med = getMed(i);
         ((TextView) rView.findViewById(R.id.item_medNameTitle)).setText(med.name);
         ((TextView) rView.findViewById(R.id.item_adminMethodTitle)).setText(med.adminMethod);
         ((TextView) rView.findViewById(R.id.item_whenToTakeTitle)).setText(med.whenToTake);
         ((TextView) rView.findViewById(R.id.item_remAmountTitle)).setText(String.format(Locale.getDefault(), "Осталось %d %s", med.remAmount, med.medType));
-        //((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(), "%.2f %s", med.doseTimes.get(0).dose, med.medType));
-        //TODO: Consider change item layout
-
+        //TODO: change remAmount input
         return rView;
     }
 }

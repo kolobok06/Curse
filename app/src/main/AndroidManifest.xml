@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.yurez.hc2">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,8 +23,9 @@
         <activity
             android:name=".AddMedActivity"
             android:label="@string/title_addMedActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".AcceptActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".AcceptActivity" />
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>
