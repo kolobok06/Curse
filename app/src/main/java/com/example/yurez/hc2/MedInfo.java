@@ -2,7 +2,6 @@ package com.example.yurez.hc2;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.ArrayList;
 
 class MedInfo implements Parcelable
@@ -12,7 +11,7 @@ class MedInfo implements Parcelable
     int numMedType = 0;
     String plan = "";
     Long startDate = -1L;
-    Long finalDate = -1L;
+    Long finalDate = Long.MAX_VALUE;
     ArrayList<DoseTime> doseTimes;
     String whenToTake = "";
     int numWhenToTake = 0;
@@ -21,7 +20,7 @@ class MedInfo implements Parcelable
     Float remAmount = -1f;
     String note = "";
     Integer state = 0;
-    Integer countPos = 0; //TODO: implement it
+    Integer countPos = 0;
     Integer countNeg = 0;
 
 

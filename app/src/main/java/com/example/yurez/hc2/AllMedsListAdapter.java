@@ -6,21 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class AllMedsListAdapter extends BaseAdapter
 {
-    private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<MedInfo> aMeds;
 
     AllMedsListAdapter(Context context, ArrayList<MedInfo> meds)
     {
-        ctx = context;
         aMeds = meds;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -53,10 +50,16 @@ public class AllMedsListAdapter extends BaseAdapter
         if (rView == null)
             rView = lInflater.inflate(R.layout.item_all_meds, viewGroup, false);
         MedInfo med = getMed(i);
-        ((TextView) rView.findViewById(R.id.item_medNameTitle)).setText(med.name);
+        ((TextView) rView.findViewById(R.id.item_today_name)).setText(med.name);
         ((TextView) rView.findViewById(R.id.item_adminMethodTitle)).setText(med.adminMethod);
         ((TextView) rView.findViewById(R.id.item_whenToTakeTitle)).setText(med.whenToTake);
-        ((TextView) rView.findViewById(R.id.item_remAmountTitle)).setText(String.format(Locale.getDefault(), "Осталось %d %s", med.remAmount, med.medType));
+        TextView tv = (TextView) rView.findViewById(R.id.item_remAmountTitle);
+        if (med.remAmount > 0)
+        {
+            tv.setVisibility(View.VISIBLE);
+            ((TextView) rView.findViewById(R.id.item_remAmountTitle)).setText(String.format(Locale.getDefault(), "Осталось %.2f %s", med.remAmount, med.medType));
+        } else
+            tv.setVisibility(View.GONE);
         //TODO: change remAmount input
         return rView;
     }

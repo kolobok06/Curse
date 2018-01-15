@@ -49,15 +49,28 @@ public class AllMedsFragment extends Fragment
                 onAllMedsListItemClicked(i);
             }
         });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                onAllMedsListItemLongClicked(position);
+                return true;
+            }
+        });
         return view;
     }
 
     public void onAllMedsListItemClicked(Integer index)
     {
         if (mListener != null)
-        {
             mListener.onFragmentAllMedsListItemClicked(index);
-        }
+    }
+
+    public void onAllMedsListItemLongClicked(int index)
+    {
+        if (mListener != null)
+            mListener.onFragmentAllMedsListItemLongClicked(index);
     }
 
     public void refreshAllMedsList()
@@ -92,5 +105,7 @@ public class AllMedsFragment extends Fragment
     public interface OnFragmentInteractionListener
     {
         void onFragmentAllMedsListItemClicked(Integer index);
+
+        void onFragmentAllMedsListItemLongClicked(int index);
     }
 }

@@ -6,20 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 class HistoryListAdapter extends BaseAdapter
 {
-    private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<SimpleMedItem> aHistory;
 
     HistoryListAdapter(Context context, ArrayList<SimpleMedItem> historyItems)
     {
-        ctx = context;
         aHistory = historyItems;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -53,7 +50,7 @@ class HistoryListAdapter extends BaseAdapter
             rView = lInflater.inflate(R.layout.item_history, viewGroup, false);
         SimpleMedItem hItem = getHistoryItem(i);
         ((TextView) rView.findViewById(R.id.item_hist_name)).setText(hItem.getName());
-        ((TextView) rView.findViewById(R.id.item_hist_time)).setText(hItem.getDate());
+        ((TextView) rView.findViewById(R.id.item_hist_time)).setText(hItem.getTime());
         ((TextView) rView.findViewById(R.id.item_hist_date)).setText(hItem.getDate());
         ((TextView) rView.findViewById(R.id.item_hist_dose)).setText(hItem.getDoseTyped());
         return rView;

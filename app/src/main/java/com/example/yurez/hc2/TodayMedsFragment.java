@@ -62,7 +62,8 @@ public class TodayMedsFragment extends Fragment
 
     public void refreshTodayMedsList()
     {
-        todayListAdapter.notifyDataSetChanged();
+        if (todayListAdapter != null)
+            todayListAdapter.notifyDataSetChanged();
     }
 
     @Override

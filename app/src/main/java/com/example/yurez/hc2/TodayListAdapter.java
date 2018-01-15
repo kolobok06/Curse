@@ -6,21 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class TodayListAdapter extends BaseAdapter
 {
-    private Context ctx;
     private LayoutInflater lInflater;
-    private ArrayList<MedInfo> aMeds;
+    private ArrayList<SimpleMedItem> aMeds;
 
-    TodayListAdapter(Context context, ArrayList<MedInfo> meds)
+    TodayListAdapter(Context context, ArrayList<SimpleMedItem> meds)
     {
-        ctx = context;
         aMeds = meds;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -41,9 +37,9 @@ public class TodayListAdapter extends BaseAdapter
         return i;
     }
 
-    public MedInfo getMed(int i)
+    public SimpleMedItem getMed(int i)
     {
-        return ((MedInfo) getItem(i));
+        return ((SimpleMedItem) getItem(i));
     }
 
     @Override
@@ -51,15 +47,11 @@ public class TodayListAdapter extends BaseAdapter
     {
         View rView = view;
         if (rView == null)
-        {
             rView = lInflater.inflate(R.layout.item_today, viewGroup, false);
-        }
-        MedInfo med = getMed(i);
-        ((TextView) rView.findViewById(R.id.item_medNameTitle)).setText(med.name);
-        ((TextView) rView.findViewById(R.id.item_adminMethodTitle)).setText(med.adminMethod);
-        ((TextView) rView.findViewById(R.id.item_whenToTakeTitle)).setText(med.whenToTake);
-        ((TextView) rView.findViewById(R.id.item_dozeTitle)).setText(String.format(Locale.getDefault(), "%s %s", med.doseTimes.get(0).getDoseString(), med.medType));
-        //TODO: Add time filling
+        SimpleMedItem med = getMed(i);
+        ((TextView) rView.findViewById(R.id.item_today_name)).setText(med.getName());
+        ((TextView) rView.findViewById(R.id.item_today_dose)).setText(med.getDoseTyped());
+        ((TextView) rView.findViewById(R.id.item_today_time)).setText(med.getTime());
         return rView;
     }
 }

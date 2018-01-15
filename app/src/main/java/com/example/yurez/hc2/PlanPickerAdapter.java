@@ -5,22 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class PlanPickerAdapter extends BaseAdapter
 {
-    private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<String> planList;
 
     PlanPickerAdapter(Context context, ArrayList<String> arrayList)
     {
-        ctx = context;
         planList = arrayList;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -46,9 +43,7 @@ public class PlanPickerAdapter extends BaseAdapter
     {
         View rView = view;
         if (rView == null)
-        {
             rView = lInflater.inflate(R.layout.item_spinner, viewGroup, false);
-        }
         String str = (String) getItem(i);
         ((TextView) rView.findViewById(R.id.item_planPickerText)).setText(str);
         return rView;

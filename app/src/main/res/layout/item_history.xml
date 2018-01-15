@@ -9,7 +9,7 @@
         android:id="@+id/item_hist_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="20/12/2018"
+        android:text="@string/default_date"
         android:textAlignment="textEnd"
         android:textSize="@dimen/title_item_textSize" />
 
@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="@string/title_medName"
+            android:text="@string/default_name"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/title_item_bigTextSize" />
 
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="10:20"
+            android:text="@string/default_time"
             android:textAlignment="textEnd"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/title_item_bigTextSize" />
@@ -42,7 +42,7 @@
         android:id="@+id/item_hist_dose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1.25 таблетки"
+        android:text="@string/default_doseTyped"
         android:textAlignment="textEnd"
         android:textSize="@dimen/title_item_textSize" />
 

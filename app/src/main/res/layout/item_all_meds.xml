@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/item_medNameTitle"
+            android:id="@+id/item_today_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -57,7 +57,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Сублингвально (под язык)"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/title_item_textSize" />
 

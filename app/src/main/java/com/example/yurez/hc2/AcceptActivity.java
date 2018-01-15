@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class AcceptActivity extends AppCompatActivity implements AddDoseDialogFragment.NoticeDialogListener
 {
-    TextView doseValue, timeValue, whenToTakeValue,
+    private TextView doseValue, timeValue, whenToTakeValue,
             adminMethodValue, datesValue, noteValue, remAmountValue;
 
     Intent intent;
@@ -71,9 +71,6 @@ public class AcceptActivity extends AppCompatActivity implements AddDoseDialogFr
         @Override
         public void onClick(View view)
         {
-            //TODO: delete alarm [outside]
-            //TODO: decrement counters [in DLC]
-            //TODO: recalculate new date [outside] {maybe don't}
             Boolean ignored = view.getTag() == null; // identification of button
 
             simpleMedItem.setIgnored(ignored);
@@ -119,14 +116,14 @@ public class AcceptActivity extends AppCompatActivity implements AddDoseDialogFr
 
         adminMethodValue.setText(String.format(loc, "%s", medInfo.adminMethod));
 
-        String dates = getString(R.string.pretext_from) +
+        String dates = getString(R.string.pretext_from) + " " +
                 DateUtils.formatDateTime(this,
                         medInfo.startDate, DateUtils.FORMAT_NUMERIC_DATE);
         if (medInfo.finalDate > 0)
         {
-            dates += getString(R.string.pretext_to) +
+            dates += " " + getString(R.string.pretext_to) + " " +
                     DateUtils.formatDateTime(this,
-                            medInfo.startDate, DateUtils.FORMAT_NUMERIC_DATE);
+                            medInfo.finalDate, DateUtils.FORMAT_NUMERIC_DATE);
         }
         datesValue.setText(String.format(loc, "%s", dates));
 

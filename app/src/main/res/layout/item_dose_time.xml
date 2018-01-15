@@ -14,7 +14,7 @@
         android:layout_gravity="bottom"
         android:layout_weight="4"
         android:gravity="bottom"
-        android:text="250 мг"
+        android:text="@string/default_doseTyped"
         android:textAlignment="gravity"
         android:textColor="@color/primary_text"
         android:textSize="@dimen/title_item_textSize" />
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="10:00"
+        android:text="@string/default_time"
         android:textAlignment="textEnd"
         android:textColor="@color/primary_text"
         android:textSize="@dimen/title_item_bigTextSize" />

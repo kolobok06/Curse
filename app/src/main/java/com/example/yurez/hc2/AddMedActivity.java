@@ -24,6 +24,7 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -36,7 +37,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
 {
     //region InitVariables
     //constants
-    final public static String TAG_DIALOG_ADD_DOSE = "addDoseDialog";
+    final public static String TAG_DIALOG_ADD_DOSE = "add_dose_dialog";
     final public static int STATE_EVERYDAY = 0;
     final public static int STATE_INTERVAL = 1;
     final public static int STATE_CYCLE = 2;
@@ -103,7 +104,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         doseTimeRecLayoutManager = new LinearLayoutManager(this);
         doseTimeRecView.setLayoutManager(doseTimeRecLayoutManager);
         doseTimeRecAdapter = new DoseTimeRecViewAdapter(doseTimeList);
-        doseTimeRecView.setAdapter(doseTimeRecAdapter);
+        doseTimeRecView.setAdapter(doseTimeRecAdapter); //TODO: OnClick
 
         fragmentManager = getFragmentManager();
         addDoseDialog = new AddDoseDialogFragment();
@@ -170,6 +171,10 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
             dateCal.set(Calendar.YEAR, year);
             dateCal.set(Calendar.MONTH, month);
             dateCal.set(Calendar.DAY_OF_MONTH, day);
+            dateCal.set(Calendar.HOUR_OF_DAY, 0);
+            dateCal.set(Calendar.MINUTE, 0);
+            dateCal.set(Calendar.SECOND, 0);
+            dateCal.set(Calendar.MILLISECOND, 0);
             setInitialDate(activeDateView);
         }
     };
@@ -226,7 +231,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         });
 
         index = getIntent().getIntExtra(MainActivity.TAG_MED_INDEX_SIMPLE, -1);
-        if (index > 0)
+        if (index >= 0)
             fillInfo(index);
     }
 
@@ -246,6 +251,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         MedInfo medInfo = new MedInfo(null);
         EditText edit;
         Spinner picker;
+
         edit = (EditText) findViewById(R.id.medNameEdit);
         medInfo.name = edit.getText().toString();
 
@@ -255,7 +261,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         picker = (Spinner) findViewById(R.id.planPicker);
         medInfo.plan = picker.getSelectedItem().toString();
 
-        medInfo.startDate = (Long) startDatePicker.getTag(); //not trusted
+        medInfo.startDate = (Long) startDatePicker.getTag();
 
         if ((planState == STATE_INTERVAL) ||
                 ((planState == STATE_HOURS) && (finalDatePicker.getTag() != null)))
@@ -273,17 +279,14 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         medInfo.adminMethod = picker.getSelectedItem().toString();
 
         edit = (EditText) findViewById(R.id.remAmountEdit);
-        medInfo.remAmount = Float.parseFloat(edit.getText().toString());
+
+        if (edit.getText().length() != 0)
+            medInfo.remAmount = Float.parseFloat(edit.getText().toString());
 
         edit = (EditText) findViewById(R.id.noteEdit);
         medInfo.note = edit.getText().toString();
 
         medInfo.state = planState;
-
-        if (planState == STATE_CYCLE)
-        {
-            //TODO: Add countPos, countNeg
-        }
         return medInfo;
     }
 
@@ -292,6 +295,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         MedInfo medInfo = MedDataHolder.aAllMeds.get(index);
         EditText edit;
         Spinner picker;
+
         edit = (EditText) findViewById(R.id.medNameEdit);
         edit.setText(medInfo.name);
 
@@ -308,7 +312,7 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         planState = medInfo.state;
         handleState();
         if ((planState == STATE_INTERVAL) ||
-                ((planState == STATE_HOURS) || (medInfo.finalDate > 0)))
+                ((planState == STATE_HOURS) || (medInfo.finalDate < Long.MAX_VALUE)))
         {
             finalDatePicker.setTag(medInfo.finalDate);
             finalDatePicker.setText(
@@ -325,16 +329,14 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         picker = (Spinner) findViewById(R.id.adminMethodPicker);
         picker.setSelection(medInfo.numAdminMethod);
 
-        edit = (EditText) findViewById(R.id.remAmountEdit);
-        edit.setText(String.format(Locale.getDefault(), "%.2f", medInfo.remAmount));
+        if (medInfo.remAmount > 0)
+        {
+            edit = (EditText) findViewById(R.id.remAmountEdit);
+            edit.setText(String.format(Locale.US, "%.2f", medInfo.remAmount));
+        }
 
         edit = (EditText) findViewById(R.id.noteEdit);
         edit.setText(medInfo.note);
-
-        if (planState == STATE_CYCLE)
-        {
-
-        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item)
@@ -346,15 +348,16 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
                 this.finish();
                 return true;
             case R.id.saveMed:
-                //TODO: check empty fields
                 if (checkEmpty())
                 {
                     Intent intent = new Intent();
-                    intent.putExtra(MainActivity.TAG_MED_INDEX, index);
-                    if (index > 0)
-                        MedDataHolder.aAllMeds.add(grabMedInfo()); //TODO: Create intent with index
-                    else
+                    if (index < 0)
+                    {
+                        MedDataHolder.aAllMeds.add(grabMedInfo());
+                        index = MedDataHolder.aAllMeds.size() - 1;
+                    } else
                         MedDataHolder.aAllMeds.set(index, grabMedInfo());
+                    intent.putExtra(MainActivity.TAG_MED_INDEX, index);
                     setResult(RESULT_OK, intent);
                     this.finish();
                 }
@@ -365,7 +368,6 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
 
     private boolean checkEmpty()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         int hintStrId = 0;
         boolean passed = true;
         EditText edit = (EditText) findViewById(R.id.medNameEdit);
@@ -386,10 +388,11 @@ public class AddMedActivity extends AppCompatActivity implements AddDoseDialogFr
         }
         if (!passed)
         {
-            builder.setTitle("Some header id from res")
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.empty_dialog_header)
                     .setMessage(hintStrId)
                     .setCancelable(false)
-                    .setNeutralButton(R.string.title_ok,
+                    .setPositiveButton(R.string.title_ok,
                             new DialogInterface.OnClickListener()
                             {
                                 @Override

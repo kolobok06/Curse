@@ -19,11 +19,12 @@ import static android.support.design.widget.FloatingActionButton.*;
 
 public class MainActivity extends AppCompatActivity implements
         AllMedsFragment.OnFragmentInteractionListener,
-        TodayMedsFragment.OnFragmentInteractionListener, AlarmReceiver.onNotifyReceived
+        TodayMedsFragment.OnFragmentInteractionListener,
+        HistoryFragment.OnFragmentInteractionListener,
+        AlarmReceiver.OnNotifyReceived
 {
     final public static String TAG_MED_INDEX = "med_index";
     final public static String TAG_MED_INDEX_SIMPLE = "med_index_simple";
-    final public static String TAG_TIME_CODE = "med_time_code";
     final public static int RESULT_ACCEPT = 100;
     final public static int RESULT_IGNORE = 200;
 
@@ -47,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     };
 
-
-    //TODO:Fragments. Selector here
     private void selectFragment(MenuItem item)
     {
         switch (item.getItemId())
@@ -131,76 +130,79 @@ public class MainActivity extends AppCompatActivity implements
                 if (resultCode == RESULT_OK) //added or changed
                 {
                     int indexMed = data.getIntExtra(TAG_MED_INDEX, -1);
-                    if (indexMed < 0)
-                        indexMed = MedDataHolder.aAllMeds.size()-1;
-                    handleNewMed(indexMed);
+                    rebuildAllSchedule();
                     allMedsFragment.refreshAllMedsList();
-                    //TODO: handle new data, refresh today
+                    historyFragment.refreshHistoryList();
                 }
                 break;
             case 2: //accept or ignored or canceled
-                if (resultCode == RESULT_ACCEPT)
-                    handleAccept();
-                else if (resultCode == RESULT_IGNORE)
-                    handleIgnore(data.getIntExtra(TAG_MED_INDEX_SIMPLE, 0));
-                historyFragment.refreshHistoryList();
+                if ((resultCode == RESULT_ACCEPT) || (resultCode == RESULT_IGNORE))
+                {
+                    int indexToday = data.getIntExtra(TAG_MED_INDEX_SIMPLE, 0);
+                    removeTimerAndTask(indexToday);
+                    historyFragment.refreshHistoryList();
+                    todayMedsFragment.refreshTodayMedsList();
+                }
         }
     }
 
-    private void handleNewMed(int indexMed)
+    private void rebuildAllSchedule()
+    {
+        deleteCurrentTimers();
+        MedDataHolder.aTodayMeds.clear();
+        rebuildSchedule(-100);
+    }
+
+    private void rebuildSchedule(int indexMed)
     {
         Long curDateMs = System.currentTimeMillis();
-        Calendar curDateStart = Calendar.getInstance(); // start of current day
-        curDateStart.setTimeInMillis(curDateMs);
-        curDateStart.set(Calendar.HOUR_OF_DAY, 0);
-        curDateStart.set(Calendar.MINUTE, 0);
-        curDateStart.set(Calendar.MILLISECOND, 1);
-
-        Calendar curDateEnd = Calendar.getInstance(); // end of current day
-        curDateEnd.setTimeInMillis(curDateMs);
-        curDateEnd.set(Calendar.HOUR_OF_DAY, 23);
-        curDateEnd.set(Calendar.MINUTE, 59);
-
-        Calendar curDate = Calendar.getInstance(); //true current time
-        curDate.setTimeInMillis(curDateMs);
-
-        Integer curH = curDate.get(Calendar.HOUR_OF_DAY);
-        Integer curM = curDate.get(Calendar.MINUTE);
-
-        DoseTime compDoseTime = new DoseTime(curH, curM, 0f); // contains current HH:mm
-
-        Calendar medDate = Calendar.getInstance(); //time from item
-
-        MedInfo item = MedDataHolder.aAllMeds.get(indexMed);
-        medDate.setTimeInMillis(item.startDate);
-        if ((medDate.compareTo(curDateStart) >= 0) && (medDate.compareTo(curDateEnd) <= 0))
-            for (int i = 0; i < item.doseTimes.size(); ++i)
+        Calendar medDate = Calendar.getInstance(); //date & time for stamp in item
+        medDate.setTimeInMillis(curDateMs); // new hours and minutes will be applied in a loop
+        medDate.set(Calendar.MILLISECOND, 0);
+        Integer curH = medDate.get(Calendar.HOUR_OF_DAY);
+        Integer curM = medDate.get(Calendar.MINUTE);
+        DoseTime compTime = new DoseTime(curH, curM, 0f); // contains current HH:mm for compare
+        int n;
+        int startIndex;
+        if (indexMed < 0)
+        {
+            n = MedDataHolder.aAllMeds.size();
+            startIndex = 0;
+        } else
+        {
+            n = indexMed + 1;
+            startIndex = indexMed;
+        }
+        for (int parentID = startIndex; parentID < n; ++parentID)
+        {
+            MedInfo item = MedDataHolder.aAllMeds.get(parentID);
+            if ((item.startDate <= curDateMs) && (curDateMs <= item.finalDate)) // today is in interval
             {
-                DoseTime dt = item.doseTimes.get(i);
-                if (dt.compareTo(compDoseTime) > 0)
+                for (int i = 0; i < item.doseTimes.size(); ++i) // look at med's schedule
                 {
-                    SimpleMedItem smi = item.packToSimple(i);
-                    medDate.set(Calendar.HOUR_OF_DAY, dt.getHour());
-                    medDate.set(Calendar.MINUTE, dt.getMin());
-                    smi.setDateMs(medDate.getTimeInMillis());
-                    smi.setParentID(indexMed);
-                    smi.setTimerID(++countTimerID);
-                    MedDataHolder.aTodayMeds.add(smi);
+                    DoseTime dt = item.doseTimes.get(i); // get one task
+                    if (dt.compareTo(compTime) > 0) // if task after this moment
+                    {
+                        SimpleMedItem smi = item.packToSimple(i);
+                        medDate.set(Calendar.HOUR_OF_DAY, dt.getHour());
+                        medDate.set(Calendar.MINUTE, dt.getMin());
+                        smi.setDateMs(medDate.getTimeInMillis()); // date is today, time from schedule
+                        smi.setParentID(parentID);
+                        smi.setTimerID(++countTimerID);
+                        MedDataHolder.aTodayMeds.add(smi);
+                        setTimer(smi.getDateMs(), smi.getTimerID());
+                    }
                 }
             }
+        }
         Collections.sort(MedDataHolder.aTodayMeds);
         todayMedsFragment.refreshTodayMedsList();
     }
 
-    private void handleIgnore(int indexTodayList) //TODO: Change
+    private void removeTimerAndTask(int indexTodayList) //TODO: Change
     {
-        deleteCurrentTimers();
+        cancelTimer(MedDataHolder.aTodayMeds.get(indexTodayList).getTimerID());
         MedDataHolder.aTodayMeds.remove(indexTodayList);
-        setCurrentTimers();
-    }
-
-    void handleAccept()
-    {
     }
 
     @Override
@@ -211,6 +213,13 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onFragmentAllMedsListItemLongClicked(int index)
+    {
+        MedDataHolder.aAllMeds.remove(index);
+        rebuildAllSchedule();
+    }
+
+    @Override
     public void onFragmentTodayMedsListItemClicked(Integer indexTodayMeds) // open accept form
     {
         startAcceptForm(indexTodayMeds);
@@ -218,66 +227,16 @@ public class MainActivity extends AppCompatActivity implements
 
     void startAcceptForm(Integer indexTodayMeds)
     {
-        //TODO: send some data
         Intent intent = new Intent(getApplicationContext(), AcceptActivity.class);
-        //intent.putExtra(TAG_MED_INFO, MedDataHolder.aTodayMeds.get(index));
         intent.putExtra(TAG_MED_INDEX_SIMPLE, indexTodayMeds);
         startActivityForResult(intent, 2);
-    }
-
-    void rebuildTodayList()
-    {
-        MedDataHolder.aTodayMeds.clear();
-        countTimerID = 0;
-        Long curDateMs = System.currentTimeMillis();
-        Calendar curDateStart = Calendar.getInstance(); // start of current day
-        curDateStart.setTimeInMillis(curDateMs);
-        curDateStart.set(Calendar.HOUR_OF_DAY, 0);
-        curDateStart.set(Calendar.MINUTE, 0);
-        curDateStart.set(Calendar.MILLISECOND, 1);
-
-        Calendar curDateEnd = Calendar.getInstance(); // end of current day
-        curDateEnd.setTimeInMillis(curDateMs);
-        curDateEnd.set(Calendar.HOUR_OF_DAY, 23);
-        curDateEnd.set(Calendar.MINUTE, 59);
-
-        Calendar curDate = Calendar.getInstance(); //true current time
-        curDate.setTimeInMillis(curDateMs);
-
-        Integer curH = curDate.get(Calendar.HOUR_OF_DAY);
-        Integer curM = curDate.get(Calendar.MINUTE);
-        DoseTime compDoseTime = new DoseTime(curH, curM, 0f); // contains current HH:mm
-
-        Calendar medDate = Calendar.getInstance(); //time from item
-
-        for (int parentID = 0; parentID < MedDataHolder.aAllMeds.size(); ++parentID)
-        {
-            MedInfo item = MedDataHolder.aAllMeds.get(parentID);
-            medDate.setTimeInMillis(item.startDate);
-            if ((medDate.compareTo(curDateStart) >= 0) && (medDate.compareTo(curDateEnd) <= 0))
-                for (int i = 0; i < item.doseTimes.size(); ++i)
-                {
-                    DoseTime dt = item.doseTimes.get(i);
-                    if (dt.compareTo(compDoseTime) > 0)
-                    {
-                        SimpleMedItem smi = item.packToSimple(i);
-                        medDate.set(Calendar.HOUR_OF_DAY, dt.getHour());
-                        medDate.set(Calendar.MINUTE, dt.getMin());
-                        smi.setDateMs(medDate.getTimeInMillis());
-                        smi.setParentID(parentID);
-                        smi.setTimerID(++countTimerID);
-                        MedDataHolder.aTodayMeds.add(smi);
-                    }
-                }
-        }
-        Collections.sort(MedDataHolder.aTodayMeds);
-        todayMedsFragment.refreshTodayMedsList();
     }
 
     private void deleteCurrentTimers()
     {
         for (int i = 0; i < MedDataHolder.aTodayMeds.size(); ++i)
             cancelTimer(MedDataHolder.aTodayMeds.get(i).getTimerID());
+        countTimerID = 0;
     }
 
     private void setCurrentTimers()
@@ -292,8 +251,8 @@ public class MainActivity extends AppCompatActivity implements
     @Deprecated
     void resetTodayTimers()
     {
-       deleteCurrentTimers();
-       setCurrentTimers();
+        deleteCurrentTimers();
+        setCurrentTimers();
     }
 
     @Override

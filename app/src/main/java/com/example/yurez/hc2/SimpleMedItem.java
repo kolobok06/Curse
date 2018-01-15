@@ -17,7 +17,6 @@ class SimpleMedItem implements Comparable<Object>
     private int parentID;
     private int timerID;
 
-
     public SimpleMedItem(String name, String medType, Long dateMs, DoseTime doseTime, Boolean ignored, int parentID)
     {
         this.name = name;
@@ -123,7 +122,7 @@ class SimpleMedItem implements Comparable<Object>
 
     public int getHour()
     {
-       return doseTime.getHour();
+        return doseTime.getHour();
     }
 
     public int getMin()

@@ -47,8 +47,7 @@ public class HistoryFragment extends Fragment
         historyListAdapter = new HistoryListAdapter(getContext(), MedDataHolder.aHistory);
         listView = (ListView) view.findViewById(R.id.listHistory);
         listView.setAdapter(historyListAdapter);
-        //TODO: click listener???
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     @Override
